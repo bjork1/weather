@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- <script src="src/openWeather.js"></script> -->
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script type="text/javascript" src="moment.js"></script>
+
+</head>
+<style>
+
+
+h1 {
+    color: white;
+    background-color: black;
+    text-align: center;
+    padding: 15px;
+}
+
+.col-sm-2dot4 {
+
+    width: 15%;
+    height: 100px;
+    background-color: teal;
+    margin: 10px;
+    color: white;
+}
+
+#box {
+    margin: 15px;
+    padding: 15px;
+    border: 1px groove whitesmoke;
+    width: 100%;
+    height: 250px;
+}
+
+
+
+</style>
+
+<header>
+    <h1>
+        Weather Dashboard
+    </h1>
+</header>
+<body>
+
+    <div class = "container">
+
+        <div class = "row">
+
+            <div class = "col-sm-3">
+
+                <p>Search for a City:</p>
+
+                <input id = "city"></input>
+                <button id = "getWeatherForecast">Get Weather</button>
+                
+
+                <table class = "table table-bordered">
+
+                    <tbody>
+
+                        <tr>
+                            <td class = "cities" id = "Austin" value = "Austin">Austin</td>
+                        </tr>
+                        <tr>
+                            <td class = "cities">Chicago</td>
+                        </tr>
+                        <tr>
+                            <td class = "cities">New York</td>
+                        </tr>
+                        <tr>
+                            <td class = "cities">Orlando</td>
+                        </tr>
+                        <tr>
+                            <td class = "cities">San Francisco</td>
+                        </tr>
+                        <tr>
+                            <td class = "cities">Seattle</td>
+                        </tr>
+                        <tr>
+                            <td class = "cities">Denver</td>
+                        </tr>
+                        <tr>
+                            <td class = "cities">Atlanta</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class = "col-sm-9">
+
+                <div class = "row">
+
+                   
+
+                    <div id = "box">
+
+                        <div id = "showName"></div>
+
+                        <div id = "showWeatherForecast"></div>
+
+                    </div>
+
+                    
+
+                   
+
+                </div>
+
+                <div class = "row">
+
+                    
+
+                    <div id = "box2">
+
+                        <h2>5-Day Forecast</h2>
+
+                    </div>
+
+                </div>
+
+                <div class = "row">
+
+                    <div class = "col-sm-2dot4">
+                        
+                        <p id = "date1"></p>
+                    </div>
+                    <div class = "col-sm-2dot4">
+                        <p id = "date2"></p>
+                    </div>
+                    <div class = "col-sm-2dot4">
+                        <p id = "date3"></p>
+                    </div>
+                    <div class = "col-sm-2dot4">
+                        <p id = "date4"></p>
+                    </div>
+                    <div class = "col-sm-2dot4">
+                        <p id = "date5"></p>
+                    </div>
+
+                </div>
+
+                    
+
+
+
+                
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <!--
+    <div class = "container">
+
+        <div class = "row">
+
+            <div class="weather-wrapper hide"> <img src="" class="weather-icon" alt="Weather Icon" />
+                
+                <p><strong>Place</strong> <br />
+                
+                <span class="weather-place"></span></p>
+                
+                <p><strong>Temperature</strong> <br />
+                
+                <span class="weather-temperature"></span> (<span class="weather-min-temperature"></span> - <span class="weather-max-temperature"></span>)</p>
+                
+                <p><strong>Description</strong> <br />
+                
+                <span class="weather-description capitalize"></span></p>
+                
+                <p><strong>Humidity</strong> <br />
+                
+                <span class="weather-humidity"></span></p>
+                
+                <p><strong>Wind speed</strong> <br />
+                
+                <span class="weather-wind-speed"></span></p>
+                
+                <p><strong>Sunrise</strong> <br />
+                
+                <span class="weather-sunrise"></span></p>
+                
+                <p><strong>Sunset</strong> <br />
+                
+                <span class="weather-sunset"></span></p>
+                
+                </div>
+                
+        </div>
+
+        <div class = "row">
+            <h1>Weather Dashboard</h1>
+        </div>
+        <div class = "row">
+
+            <div class = "col-sm-4">
+
+                <table>
+
+            
+            <input type="text" placeholder="Search..">
+
+            <table>
+
+            <tr>
+
+                <td>
+                    Austin
+                </td>
+            </tr>
+        <tr>
+
+        <td>
+            Chicago
+        </td>
+    </tr>
+<tr>
+
+<td>
+    New York
+</td>
+</tr>
+<tr>
+
+<td>
+    Orlando
+</td>
+</tr>
+<tr>
+
+<td>
+    San Francisco
+</td>
+</tr>
+<tr>
+
+<td>
+    Seattle
+</td>
+</tr>
+<tr>
+
+    <td>
+       Denver
+    </td>
+    </tr>
+    <tr>
+
+        <td>
+            Atlanta
+        </td>
+        </tr>
+
+
+        </table>
+        
+
+            
+        </div>
+
+        <div class = "col-sm-8">
+
+        <div class = "row">
+            <div class = "col-sm-4">
+
+                <p>Search for a City:</p>
+
+            </div>
+
+            <div class = "col-sm-8">
+                
+                <div class = "row">
+                    
+                    <div class = "col">
+                    <p>Atlanta (8/15/2019)</p>
+                    <p>Temperature: 90.9 degrees F</p>
+                    <p>Humidity: 41%</p>
+                    <p>Wind Speed: 4.7 MPH</p>
+                    <p>UV Index:</p>
+                    </div>
+
+                </div>
+
+                <div class = "row">
+
+                    <p>5 Day Forecast</p>
+                    
+                </div>
+
+                <div class = "row">
+                    <div class = "col-sm-2dot4">
+                        <p>1</p>
+                    </div>
+                    <div class = "col-sm-2dot4">
+                        <p>1</p>
+                    </div>
+                    <div class = "col-sm-2dot4">
+                        <p>1</p>
+                    </div>
+                    <div class = "col-sm-2dot4">
+                        <p>1</p>
+                    </div>
+                    <div class = "col-sm-2dot4">
+                        <p>1</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        </div>
+
+
+    </div>
+
+
+-->
+
+
+</body>
+
+<script>
+
+//0cf06c0b9a2b575dc7b68061487fd8c7
+//api.openweathermap.org/data/2.5/forecast?id=524901&APPID=1111111111
+
+
+
+$(document).ready(function() {
+
+//var getName = $("#Austin").val();
+
+    var dateTest = moment().add(1,'days').format('l');
+    console.log(dateTest);
+
+//add Future Dates to each blue box
+    var futureDate1 = moment().add(1,'days').format('l');
+    var futureDate2 = moment().add(2,'days').format('l');
+    var futureDate3 = moment().add(3,'days').format('l');
+    var futureDate4 = moment().add(4,'days').format('l');
+    var futureDate5 = moment().add(5,'days').format('l');
+
+
+    $('#date1').append(futureDate1);
+    $('#date2').append(futureDate2);
+    $('#date3').append(futureDate3);
+    $('#date4').append(futureDate4);
+    $('#date5').append(futureDate5);
+
+
+
+    
+    $("#getWeatherForecast").click(function() {
+        var city = $("#city").val();
+        var key = "0cf06c0b9a2b575dc7b68061487fd8c7";
+        var date = moment().format('l');
+        
+
+        
+
+
+        $.ajax({
+            url: 'http://api.openweathermap.org/data/2.5/weather',
+            dataType: 'json',
+            type: 'GET',
+            data: {q : city, appid: key, units: 'metric'},
+
+            
+            success: function(data){
+                var wf = '';
+                $.each(data.weather, function(index, val) {
+                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b><img src = "+ val.icon + ".png></h2>" + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
+                });
+                $("#showWeatherForecast").html(wf);
+            }
+        })
+    });
+
+
+    var cityClick = $(".cities");
+
+    $(cityClick).click(function() {
+        var city = $(this).text();
+        var key = "0cf06c0b9a2b575dc7b68061487fd8c7";
+        var date = moment().format('l');
+        
+
+        
+
+
+        $.ajax({
+            url: 'http://api.openweathermap.org/data/2.5/weather',
+            dataType: 'json',
+            type: 'GET',
+            data: {q : city, appid: key, units: 'metric'},
+
+            
+            success: function(data){
+                var wf = '';
+                $.each(data.weather, function(index, val) {
+                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b><img src = "+ val.icon + ".png></h2>" + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
+                });
+                $("#showWeatherForecast").html(wf);
+            }
+        })
+
+
+
+
+
+    })
+
+
+
+});
+
+
+/*
+
+$(function() {
+
+   
+
+  $('.weather-temperature').openWeather({
+
+  city:'Toronto, ON',// city name, country / province/ state
+
+  lat:null, // defines the latitude
+
+  lng:null, // defines the longitude
+
+  key:'0cf06c0b9a2b575dc7b68061487fd8c7',
+
+  units:"c", // defines the type of units (c or f).
+
+  lang:'en',
+
+  descriptionTarget:'.weather-description',
+
+  windSpeedTarget:'.weather-wind-speed',
+
+  minTemperatureTarget:'.weather-min-temperature',
+
+  maxTemperatureTarget:'.weather-max-temperature',
+
+  humidityTarget:'.weather-humidity',
+
+  sunriseTarget:'.weather-sunrise',
+
+  sunsetTarget:'.weather-sunset',
+
+  placeTarget:'.weather-place',
+
+  iconTarget:'.weather-icon',
+
+  customIcons:'src/img/icons/weather/',
+
+  success:function() {
+
+ 
+
+    //show weather
+
+    $('.weather-wrapper').show();
+
+ 
+
+  },
+
+  error:function(message) {}
+
+  });
+
+ 
+
+});
+
+*/
+
+</script>
+</html>
