@@ -274,15 +274,19 @@ h1 {
                     </div>
                     <div class = "col-sm-2dot4">
                         <p id = "date2"></p>
+                        <p id = "futureTemp2"></p>
                     </div>
                     <div class = "col-sm-2dot4">
                         <p id = "date3"></p>
+                        <p id = "futureTemp3"></p>
                     </div>
                     <div class = "col-sm-2dot4">
                         <p id = "date4"></p>
+                        <p id = "futureTemp4"></p>
                     </div>
                     <div class = "col-sm-2dot4">
                         <p id = "date5"></p>
+                        <p id = "futureTemp5"></p>
                     </div>
 
                 </div>
@@ -565,13 +569,16 @@ $(document).ready(function() {
             url: 'http://api.openweathermap.org/data/2.5/forecast',
             dataType: 'json',
             type: 'GET',
-            data: {q : city, appid: key, units: 'metric', cnt: "17"},
+            data: {q : city, appid: key, units: 'metric', cnt: "0"},
 
                        
             success: function(data){
               
                 var wf = "";
-                var newArray = new Array();
+                var newArray = [];
+                var i;
+                
+                var testArray = [];
                 wf += "<h2>" + data.city.name + "</h2>"; // Don't need this
                     
 
@@ -580,24 +587,79 @@ $(document).ready(function() {
                         console.log(newArray[1]);
                     } 
                         
+
+
+
+                       //for (i = 0; i < data.list.length; i++) {
+
+                            $.each(data.list, function(index, val) {
+
+                            wf += "<p>" // Opening paragraph tag
+                            wf += "<b>Day " + index + "</b>: " // Day
+                            //wf += val.main.temp + "&degC" // Temperature
+                            wf += "<span> | " + val.weather[0].description + "</span>"; // Description
+                            wf += "</p>" // Closing paragraph tag
+
+                            newArray.push($(wf));
+
+                            });
+                        
+
+                       // }
+
+                            
+
+
+
+                            /*
                         
                         $.each(data.list, function(index, val) {
                             wf += "<p>" // Opening paragraph tag
                             wf += "<b>Day " + index + "</b>: " // Day
                             wf += val.main.temp + "&degC" // Temperature
-                            wf += "<span> | " + val.weather[0].description + "</span>"; // Description
+                            wf += "<span> | " + val.weather[i].description + "</span>"; // Description
                             wf += "</p>" // Closing paragraph tag
+
+                        
+                            */
                             
+
                             newArray.push($(wf));
+
+                            console.log(newArray);
+
+                            /*
+                            wf.forEach(testy => {
+                                newArray.push({
+                                    testy
+                                })
+
+                            })
+
+                            */
+                        
+
+                        
+                            
+                    
+                            $("#futureTemp1").html(newArray[0]);
+                            $("#futureTemp2").html(newArray[1]);
+                            $("#futureTemp3").html(newArray[2]);
+                            $("#futureTemp4").html(newArray[3]);
+                            $("#futureTemp5").html(newArray[4]);
                     //push each item into a new array
-                        });
+                            
+                            
+                        
 
-                        console.log(newArray[0]);
+
+
+                       
 
                    
 
                    
-                $("#futureTemp1").html(newArray[0]);
+                
                 
 
             }
