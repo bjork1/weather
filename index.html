@@ -13,11 +13,20 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+ <!--   <script src="https://use.fontawesome.com/2f13b81004.js" ></script> -->
+
+    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+    <script type = "nomodule" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+   
     <script type="text/javascript" src="moment.js"></script>
+
+   <!-- Set-Cookie: <cookie-name>=<cookie-value>; SameSite=Strict -->
 
 </head>
 <style>
 
+
+/*
 body {
   background: #dce2e5;
   font-family: "Roboto", sans-serif;
@@ -150,6 +159,12 @@ small {
   font-size: 12px;
 }
 
+*/
+
+
+
+/*   MC  */
+
 
 h1 {
     color: white;
@@ -157,6 +172,8 @@ h1 {
     text-align: center;
     padding: 15px;
 }
+
+/*   MC  */
 
 .col-sm-2dot4 {
 
@@ -167,12 +184,22 @@ h1 {
     color: white;
 }
 
+
+/*   MC  */
+
 #box {
     margin: 15px;
     padding: 15px;
     border: 1px groove whitesmoke;
     width: 100%;
     height: 250px;
+}
+
+#getWeatherForecast {
+    background-color: blue;
+    color: white;
+    font-size: 30px;
+
 }
 
 
@@ -194,8 +221,13 @@ h1 {
 
                 <p>Search for a City:</p>
 
+                <div>
+
                 <input id = "city"></input>
-                <button id = "getWeatherForecast">Get Weather</button>
+
+                <!-- <button id = "getWeatherForecast"></button> -->
+                <ion-icon id = "getWeatherForecast" name="search"></ion-icon>
+                </div>
                 
 
                 <table class = "table table-bordered">
@@ -267,10 +299,30 @@ h1 {
 
                 <div class = "row">
 
+                    <div class="card" style="width: 12rem;">
+                        <div class="card-body">
+                          <h5 id = "date1" class="card-title"></h5>
+                          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                          <p id = "futureTemp1" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          
+                          <!--
+                          
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        
+                          -->
+
+                        </div>
+                      </div>
+
+                </div>
+
+                <div class = "row">
+
                     <div class = "col-sm-2dot4">
                         
-                        <p id = "date1"></p>
-                        <p id = "futureTemp1"></p>
+                        <p >Placeholder</p>
+                        <p >Placeholder</p>
                     </div>
                     <div class = "col-sm-2dot4">
                         <p id = "date2"></p>
@@ -291,6 +343,9 @@ h1 {
 
                 </div>
 
+
+                <!--
+
                 <div class = "row">
 
                     <div class="component__weather-box">
@@ -305,6 +360,8 @@ h1 {
 
                 </div>
 
+            -->
+
                     
 
 
@@ -316,6 +373,16 @@ h1 {
         </div>
 
     </div>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
 
 
 
@@ -538,7 +605,57 @@ $(document).ready(function() {
                 $("#showWeatherForecast").html(wf);
             }
         })
-    });
+
+        //Add array forecast call
+
+        $.ajax({
+            url: 'http://api.openweathermap.org/data/2.5/forecast',
+            dataType: 'json',
+            type: 'GET',
+            data: {q : city, appid: key, units: 'metric', cnt: "0"},
+            jsonpCallback: 'fetch data',
+
+
+            
+                       
+            success: function(data){
+              
+                //var wf = "";
+                var newArray = [];
+                var i;
+                
+                var testArray = [];
+
+
+                $.each(data.list, function(index, val) {
+
+                var wf = "<p>" // Opening paragraph tag
+// Icon weather
+//wf += "<b>Day " + index + "</b>: " // Day
+                            wf += "Temp: " + val.main.temp + "&degC" + val.main.humidity + "words" // Temperature
+//wf += "<span> | " + val.weather[0].description + "</span>"; // Description
+// wf += "Humidity: " + list.main.humidity
+
+                            wf += "</p>" // Closing paragraph tag
+
+                            newArray.push($(wf));
+
+        });
+
+                            $("#futureTemp1").html(newArray[0]);
+                            $("#futureTemp2").html(newArray[1]);
+                            $("#futureTemp3").html(newArray[2]);
+                            $("#futureTemp4").html(newArray[3]);
+                            $("#futureTemp5").html(newArray[4]);
+
+
+            
+
+
+        //End array forecast call
+    
+    }
+});
 
 
     var cityClick = $(".cities");
@@ -554,6 +671,7 @@ $(document).ready(function() {
             dataType: 'json',
             type: 'GET',
             data: {q : city, appid: key, units: 'metric'},
+            
 
             
             success: function(data){
@@ -570,16 +688,19 @@ $(document).ready(function() {
             dataType: 'json',
             type: 'GET',
             data: {q : city, appid: key, units: 'metric', cnt: "0"},
+            jsonpCallback: 'fetch data',
 
+
+            
                        
             success: function(data){
               
-                var wf = "";
+                //var wf = "";
                 var newArray = [];
                 var i;
                 
                 var testArray = [];
-                wf += "<h2>" + data.city.name + "</h2>"; // Don't need this
+                //wf += "<h2>" + data.city.name + "</h2>"; // Don't need this
                     
 
 
@@ -594,10 +715,13 @@ $(document).ready(function() {
 
                             $.each(data.list, function(index, val) {
 
-                            wf += "<p>" // Opening paragraph tag
-                            wf += "<b>Day " + index + "</b>: " // Day
-                            //wf += val.main.temp + "&degC" // Temperature
-                            wf += "<span> | " + val.weather[0].description + "</span>"; // Description
+                            var wf = "<p>" // Opening paragraph tag
+                            // Icon weather
+                            //wf += "<b>Day " + index + "</b>: " // Day
+                            wf += "Temp: " + val.main.temp + "&degC" + val.main.humidity + "words" // Temperature
+                            //wf += "<span> | " + val.weather[0].description + "</span>"; // Description
+                           // wf += "Humidity: " + list.main.humidity
+                            
                             wf += "</p>" // Closing paragraph tag
 
                             newArray.push($(wf));
@@ -624,7 +748,7 @@ $(document).ready(function() {
                             */
                             
 
-                            newArray.push($(wf));
+                            //newArray.push($(wf));
 
                             console.log(newArray);
 
@@ -665,7 +789,12 @@ $(document).ready(function() {
             }
         });
 
+        
+
     });
+
+});
+
 
 });
 
