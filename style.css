@@ -1,0 +1,42 @@
+h1 {
+    color: white;
+    background-color: black;
+    text-align: center;
+    padding: 15px;
+}
+
+#city {
+    width: 75%;
+}
+
+.searchBar {
+    display: block;
+    height: 50px;
+    font-size: 18px;
+}
+
+.col-sm-2dot4 {
+    width: 15%;
+    height: 100px;
+    background-color: teal;
+    margin: 10px;
+    color: white;
+}
+
+#box {
+    margin: 15px;
+    padding: 15px;
+    border: 1px groove whitesmoke;
+    width: 100%;
+    height: 250px;
+}
+
+#getWeatherForecast {
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 30px;
+}
+
+#fiveDayHeader {
+    font-size: 24px;
+}
