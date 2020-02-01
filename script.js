@@ -21,25 +21,39 @@ $(document).ready(function() {
         var city = $("#city").val();
         var key = "0cf06c0b9a2b575dc7b68061487fd8c7";
         var date = moment().format('l');
-        var iconCode = data.weather[0].icon;
-        var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+
+        //Search for City, header
         
         $.ajax({
+            
+            
+            
             url: 'http://api.openweathermap.org/data/2.5/weather',
             dataType: 'json',
             type: 'GET',
             data: {q : city, appid: key, units: 'metric'},
-           
+
+
+
+            
+
+
+                       
             success: function(data){
+                //var longitude = data.coord.lon;
+                //var latitude = data.coord.lat;
+                
+
+                
                 var wf = '';
                 $.each(data.weather, function(index, val) {
-                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b>" + '/h2' + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
+                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b>" + "<img src = 'http://openweathermap.org/img/w/" + data['weather'][0].icon + ".png'>" + "</h2>" + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
                 });
                 $("#showWeatherForecast").html(wf);
             }
         })
 
-        //Add array forecast call
+        //search for City, forecast
 
         $.ajax({
             url: 'http://api.openweathermap.org/data/2.5/forecast',
@@ -49,33 +63,29 @@ $(document).ready(function() {
             jsonpCallback: 'fetch data',
                        
             success: function(data){
-              
-                //var wf = "";
+
+                console.log(data['list'][2]['weather'][0].icon);
                 var newArray = [];
+                var x = 0;
+                
 
                 $.each(data.list, function(index, val) {
-
-                var wf = "<p>" // Opening paragraph tag
-// Icon weather
-//wf += "<b>Day " + index + "</b>: " // Day
-                            wf += "Temp: " + val.main.temp + "&degC" + "</br>" + "<p>Humidity: " + val.main.humidity + "%</p>" // Temperature
-//wf += "<span> | " + val.weather[0].description + "</span>"; // Description
-// wf += "Humidity: " + list.main.humidity
-
-                            wf += "</p>" // Closing paragraph tag
-                           newArray.push($(wf));
+                var wf = '' ;
+                var counter = x++;
+                wf += "<img src = 'http://openweathermap.org/img/w/" + data['list'][counter]['weather'][0].icon + ".png'>" + "</br>" + "Temp: " + val.main.temp + "&degC" + "</br>" + "<p>Humidity: " + val.main.humidity + "%</p>" // Temperature
+                wf += "</p>"
+                newArray.push($(wf));
+        });
+                $("#futureTemp1").html(newArray[0]);
+                $("#futureTemp2").html(newArray[1]);
+                $("#futureTemp3").html(newArray[2]);
+                $("#futureTemp4").html(newArray[3]);
+                $("#futureTemp5").html(newArray[4]);    
+            }
         });
 
-                            $("#futureTemp1").html(newArray[0]);
-                            $("#futureTemp2").html(newArray[1]);
-                            $("#futureTemp3").html(newArray[2]);
-                            $("#futureTemp4").html(newArray[3]);
-                            $("#futureTemp5").html(newArray[4]);
 
-        //End array forecast call
-    
-    }
-});
+    });
 
     var cityClick = $(".cities");
 
@@ -83,6 +93,8 @@ $(document).ready(function() {
         var city = $(this).text();
         var key = "0cf06c0b9a2b575dc7b68061487fd8c7";
         var date = moment().format('l');
+
+        //Click button, header
         
         $.ajax({
             url: 'http://api.openweathermap.org/data/2.5/weather',
@@ -93,11 +105,13 @@ $(document).ready(function() {
             success: function(data){
                 var wf = '';
                 $.each(data.weather, function(index, val) {
-                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b><img src = "+ val.icon + ".png></h2>" + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
+                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b>" + "<img src = 'http://openweathermap.org/img/w/" + data['weather'][0].icon + ".png'>" + "</h2>" + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
                 });
                 $("#showWeatherForecast").html(wf);
             }
         })
+
+        //Click button, forecast
 
         $.ajax({
             url: 'http://api.openweathermap.org/data/2.5/forecast',
@@ -105,67 +119,25 @@ $(document).ready(function() {
             type: 'GET',
             data: {q : city, appid: key, units: 'metric', cnt: "0"},
             jsonpCallback: 'fetch data',
-                      
-            success: function(data){              
-                //var wf = "";
+                       
+            success: function(data){
+
+                console.log(data);
+                var x = 0;
+              
                 var newArray = [];
-                
-                      //for (i = 0; i < data.list.length; i++) {
-
-                            $.each(data.list, function(index, val) {
-
-                            var wf = "<p>" // Opening paragraph tag
-                            // Icon weather
-                            //wf += "<b>Day " + index + "</b>: " // Day
-                            wf += "test" + weather.icon + "Temp: " + val.main.temp + "&degC" + val.main.humidity + "words" // Temperature
-                            //wf += "<span> | " + val.weather[0].description + "</span>"; // Description
-                           // wf += "Humidity: " + list.main.humidity
-                            
-                            wf += "</p>" // Closing paragraph tag
-
-                            newArray.push($(wf));
-
-                            });
-                        
-
-                       // }
-
-                            
-
-
-
-                            /*
-                        
-                        $.each(data.list, function(index, val) {
-                            wf += "<p>" // Opening paragraph tag
-                            wf += "<b>Day " + index + "</b>: " // Day
-                            wf += val.main.temp + "&degC" // Temperature
-                            wf += "<span> | " + val.weather[i].description + "</span>"; // Description
-                            wf += "</p>" // Closing paragraph tag
-
-                        
-                            */
-                            
-
-                            //newArray.push($(wf));
-
-                            console.log(newArray);
-
-                            /*
-                            wf.forEach(testy => {
-                                newArray.push({
-                                    testy
-                                })
-                            })
-                            */                    
-                            $("#futureTemp1").html(newArray[0]);
-                            $("#futureTemp2").html(newArray[1]);
-                            $("#futureTemp3").html(newArray[2]);
-                            $("#futureTemp4").html(newArray[3]);
-                            $("#futureTemp5").html(newArray[4]);
-                    //push each item into a new array                
+                $.each(data.list, function(index, val) {
+                var wf = '' 
+                wf += "<img src = 'http://openweathermap.org/img/w/" + data['list'][counter]['weather'][0].icon + ".png'>" + "</br>" + "Temp: " + val.main.temp + "&degC" + "</br>" + "<p>Humidity: " + val.main.humidity + "%</p>" // Temperature
+                wf += "</p>"
+                newArray.push($(wf));
+        });
+                $("#futureTemp1").html(newArray[0]);
+                $("#futureTemp2").html(newArray[1]);
+                $("#futureTemp3").html(newArray[2]);
+                $("#futureTemp4").html(newArray[3]);
+                $("#futureTemp5").html(newArray[4]);    
             }
         });
     });
-});
 });
