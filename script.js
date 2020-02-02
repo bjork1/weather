@@ -122,12 +122,13 @@ $(document).ready(function() {
                        
             success: function(data){
 
-                console.log(data);
+                console.log("HEllo");
                 var x = 0;
               
                 var newArray = [];
                 $.each(data.list, function(index, val) {
-                var wf = '' 
+                var wf = ''
+                var counter = x++;
                 wf += "<img src = 'https://openweathermap.org/img/w/" + data['list'][counter]['weather'][0].icon + ".png'>" + "</br>" + "Temp: " + val.main.temp + "&degC" + "</br>" + "<p>Humidity: " + val.main.humidity + "%</p>" // Temperature
                 wf += "</p>"
                 newArray.push($(wf));
