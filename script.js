@@ -28,7 +28,7 @@ $(document).ready(function() {
             
             
             
-            url: 'http://api.openweathermap.org/data/2.5/weather',
+            url: 'https://api.openweathermap.org/data/2.5/weather',
             dataType: 'json',
             type: 'GET',
             data: {q : city, appid: key, units: 'metric'},
@@ -47,7 +47,7 @@ $(document).ready(function() {
                 
                 var wf = '';
                 $.each(data.weather, function(index, val) {
-                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b>" + "<img src = 'http://openweathermap.org/img/w/" + data['weather'][0].icon + ".png'>" + "</h2>" + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
+                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b>" + "<img src = 'https://openweathermap.org/img/w/" + data['weather'][0].icon + ".png'>" + "</h2>" + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
                 });
                 $("#showWeatherForecast").html(wf);
             }
@@ -56,7 +56,7 @@ $(document).ready(function() {
         //search for City, forecast
 
         $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/forecast',
+            url: 'https://api.openweathermap.org/data/2.5/forecast',
             dataType: 'json',
             type: 'GET',
             data: {q : city, appid: key, units: 'metric', cnt: "0"},
@@ -72,7 +72,7 @@ $(document).ready(function() {
                 $.each(data.list, function(index, val) {
                 var wf = '' ;
                 var counter = x++;
-                wf += "<img src = 'http://openweathermap.org/img/w/" + data['list'][counter]['weather'][0].icon + ".png'>" + "</br>" + "Temp: " + val.main.temp + "&degC" + "</br>" + "<p>Humidity: " + val.main.humidity + "%</p>" // Temperature
+                wf += "<img src = 'https://openweathermap.org/img/w/" + data['list'][counter]['weather'][0].icon + ".png'>" + "</br>" + "Temp: " + val.main.temp + "&degC" + "</br>" + "<p>Humidity: " + val.main.humidity + "%</p>" // Temperature
                 wf += "</p>"
                 newArray.push($(wf));
         });
@@ -97,7 +97,7 @@ $(document).ready(function() {
         //Click button, header
         
         $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/weather',
+            url: 'https://api.openweathermap.org/data/2.5/weather',
             dataType: 'json',
             type: 'GET',
             data: {q : city, appid: key, units: 'metric'},
@@ -105,7 +105,7 @@ $(document).ready(function() {
             success: function(data){
                 var wf = '';
                 $.each(data.weather, function(index, val) {
-                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b>" + "<img src = 'http://openweathermap.org/img/w/" + data['weather'][0].icon + ".png'>" + "</h2>" + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
+                    wf += '<h2><b>' + data.name +' (' + date + ')' + "</b>" + "<img src = 'https://openweathermap.org/img/w/" + data['weather'][0].icon + ".png'>" + "</h2>" + '<p>Temperature: ' + data.main.temp + '&deg;C  </p>'+ '<p>Humidity: ' + data.main.humidity + '%</p>'+ '<p>Wind Speed: ' + data.wind.speed + ' MPH</p>' + val.main + ', ' + val.description
                 });
                 $("#showWeatherForecast").html(wf);
             }
@@ -114,7 +114,7 @@ $(document).ready(function() {
         //Click button, forecast
 
         $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/forecast',
+            url: 'https://api.openweathermap.org/data/2.5/forecast',
             dataType: 'json',
             type: 'GET',
             data: {q : city, appid: key, units: 'metric', cnt: "0"},
@@ -128,7 +128,7 @@ $(document).ready(function() {
                 var newArray = [];
                 $.each(data.list, function(index, val) {
                 var wf = '' 
-                wf += "<img src = 'http://openweathermap.org/img/w/" + data['list'][counter]['weather'][0].icon + ".png'>" + "</br>" + "Temp: " + val.main.temp + "&degC" + "</br>" + "<p>Humidity: " + val.main.humidity + "%</p>" // Temperature
+                wf += "<img src = 'https://openweathermap.org/img/w/" + data['list'][counter]['weather'][0].icon + ".png'>" + "</br>" + "Temp: " + val.main.temp + "&degC" + "</br>" + "<p>Humidity: " + val.main.humidity + "%</p>" // Temperature
                 wf += "</p>"
                 newArray.push($(wf));
         });
